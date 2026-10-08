@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ZAGLY</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+    <style>
+
+        /* ==================================================
+           CONFIRMAÇÃO DO PEDIDO
+        ================================================== */
+
+        .order-success {
+            display: none;
+            min-height: 70vh;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 24px;
+        }
+
+        .order-success.active {
+            display: flex;
+        }
+
+        .order-success-content {
+            width: 100%;
+            max-width: 620px;
+            text-align: center;
+            padding: 60px 30px;
+        }
+
+        .order-success-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 28px;
+            border: 1px solid #111;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 400;
+        }
+
+        .order-success h1 {
+            margin: 0 0 18px;
+            font-size: clamp(32px, 5vw, 52px);
+            font-weight: 500;
+            letter-spacing: -0.04em;
+        }
+
+        .order-success p {
+            max-width: 480px;
+            margin: 0 auto 32px;
+            color: #666;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .order-success-note {
+            margin-bottom: 36px !important;
+            font-size: 13px !important;
+        }
+
+        .order-success-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 52px;
+            padding: 0 30px;
+            border: 1px solid #111;
+            background: #111;
+            color: #fff;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 14px;
+            transition: opacity 0.2s ease;
+        }
+
+        .order-success-button:hover {
+            opacity: 0.85;
+        }
+
+        @media (max-width: 600px) {
+
+            .order-success {
+                min-height: 65vh;
+                padding: 50px 20px;
+            }
+
+            .order-success-content {
+                padding: 40px 10px;
+            }
+
+            .order-success h1 {
+                font-size: 34px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     HEADER
+================================================== -->
+
+<header class="header">
+
+    <div class="header-container">
+
+        <a
+            href="#inicio"
+            class="logo"
+        >
+            ZAGLY
+        </a>
+
+
+        <nav class="navigation">
+
+            <a href="#inicio">
+                Início
+            </a>
+
+            <a href="#produtos">
+                Produtos
+            </a>
+
+            <a href="#sobre">
+                Sobre
+            </a>
+
+        </nav>
+
+
+        <button
+            class="cart-button"
+            id="open-cart"
+            type="button"
+        >
+
+            <span>
+                Carrinho
+            </span>
+
+            <span id="cart-count">
+                0
+            </span>
+
+        </button>
+
+    </div>
+
+</header>
+
+
+
+<!-- ==================================================
+     HERO
+================================================== -->
+
+<main id="inicio">
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="eyebrow">
+                ZAGLY
+            </p>
+
+            <h1>
+                Básicos para<br>
+                todos os dias.
+            </h1>
+
+            <p class="hero-text">
+                Peças essenciais, fáceis de combinar
+                e pensadas para acompanhar sua rotina.
+            </p>
+
+            <a
+                href="#produtos"
+                class="primary-button"
+            >
+                Ver produtos
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+<!-- ==================================================
+     PRODUTOS
+================================================== -->
+
+<section
+    class="products-section"
+    id="produtos"
+>
+
+    <div class="section-header">
+
+        <div>
+
+            <p class="eyebrow">
+                COLEÇÃO
+            </p>
+
+            <h2>
+                Produtos
+            </h2>
+
+        </div>
+
+        <p class="section-description">
+            Peças disponíveis em estoque.
+        </p>
+
+    </div>
+
+
+    <div class="category-filters">
+
+        <button
+            type="button"
+            class="category-button active"
+            data-category="Todos"
+        >
+            Todos
+        </button>
+
+        <button
+            type="button"
+            class="category-button"
+            data-category="Camisetas"
+        >
+            Camisetas
+        </button>
+
+        <button
+            type="button"
+            class="category-button"
+            data-category="Bermudas"
+        >
+            Bermudas
+        </button>
+
+    </div>
+
+
+    <div
+        class="products-grid"
+        id="products-grid"
+    ></div>
+
+</section>
+
+
+
+<!-- ==================================================
+     SOBRE
+================================================== -->
+
+<section
+    class="about-section"
+    id="sobre"
+>
+
+    <div class="about-content">
+
+        <p class="eyebrow">
+            SOBRE A ZAGLY
+        </p>
+
+        <h2>
+            O essencial,<br>
+            do seu jeito.
+        </h2>
+
+        <p>
+            A Zagly nasceu para tornar mais simples
+            encontrar peças básicas, versáteis e
+            acessíveis para a rotina.
+        </p>
+
+    </div>
+
+</section>
+
+</main>
+
+
+
+<!-- ==================================================
+     MODAL DO PRODUTO
+================================================== -->
+
+<div
+    class="product-modal"
+    id="product-modal"
+>
+
+    <div class="product-modal-content">
+
+        <button
+            type="button"
+            class="product-modal-close"
+            onclick="closeProduct()"
+            aria-label="Fechar"
+        >
+            ×
+        </button>
+
+
+        <div class="product-gallery">
+
+            <div class="product-modal-image">
+
+                <button
+                    type="button"
+                    class="gallery-arrow gallery-prev"
+                    onclick="previousProductImage()"
+                    aria-label="Imagem anterior"
+                >
+                    ‹
+                </button>
+
+
+                <img
+                    id="modal-product-image"
+                    src=""
+                    alt=""
+                >
+
+
+                <button
+                    type="button"
+                    class="gallery-arrow gallery-next"
+                    onclick="nextProductImage()"
+                    aria-label="Próxima imagem"
+                >
+                    ›
+                </button>
+
+            </div>
+
+
+            <div
+                class="product-thumbnails"
+                id="product-thumbnails"
+            ></div>
+
+        </div>
+
+
+
+        <div class="product-modal-info">
+
+            <p class="eyebrow">
+                ZAGLY
+            </p>
+
+            <h2 id="modal-product-name">
+                Produto
+            </h2>
+
+            <p
+                class="modal-product-price"
+                id="modal-product-price"
+            >
+                R$ 0,00
+            </p>
+
+            <p
+                class="modal-product-description"
+                id="modal-product-description"
+            ></p>
+
+
+            <div class="modal-option">
+
+                <p>
+                    Tamanho
+                </p>
+
+                <div
+                    class="modal-product-sizes"
+                    id="modal-product-sizes"
+                ></div>
+
+            </div>
+
+
+            <div class="modal-option">
+
+                <p>
+                    Quantidade
+                </p>
+
+                <div class="modal-quantity">
+
+                    <button
+                        type="button"
+                        onclick="decreaseProductQuantity()"
+                    >
+                        −
+                    </button>
+
+                    <span id="modal-quantity">
+                        1
+                    </span>
+
+                    <button
+                        type="button"
+                        onclick="increaseProductQuantity()"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="modal-add-button"
+                onclick="addProductToCart()"
+            >
+                Adicionar ao carrinho
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ==================================================
+     CARRINHO
+================================================== -->
+
+<div
+    class="cart-overlay"
+    id="cart-overlay"
+></div>
+
+
+<aside
+    class="cart"
+    id="cart"
+>
+
+    <div class="cart-header">
+
+        <h2>
+            Seu carrinho
+        </h2>
+
+        <button
+            type="button"
+            class="close-button"
+            id="close-cart"
+            aria-label="Fechar carrinho"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-items"
+        id="cart-items"
+    ></div>
+
+
+    <div class="cart-footer">
+
+        <div class="cart-total">
+
+            <span>
+                Total
+            </span>
+
+            <strong id="cart-total">
+                R$ 0,00
+            </strong>
+
+        </div>
+
+
+        <button
+            type="button"
+            class="checkout-button"
+            id="checkout-button"
+        >
+            Finalizar compra
+        </button>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ==================================================
+     CHECKOUT
+================================================== -->
+
+<section
+    class="checkout-page"
+    id="checkout-page"
+>
+
+    <div class="checkout-container">
+
+
+        <div class="checkout-header">
+
+            <button
+                type="button"
+                class="checkout-back"
+                id="checkout-back"
+            >
+                ← Voltar
+            </button>
+
+            <p class="eyebrow">
+                ZAGLY
+            </p>
+
+            <h1>
+                Finalizar compra
+            </h1>
+
+            <p>
+                Confira seus dados antes de continuar.
+            </p>
+
+        </div>
+
+
+
+        <div class="checkout-content">
+
+
+            <div class="checkout-form">
+
+
+                <!-- DADOS -->
+
+                <div class="checkout-section">
+
+                    <div class="checkout-section-title">
+
+                        <span>
+                            01
+                        </span>
+
+                        <h2>
+                            Seus dados
+                        </h2>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="checkout-name">
+                            Nome completo
+                        </label>
+
+                        <input
+                            type="text"
+                            id="checkout-name"
+                            placeholder="Digite seu nome"
+                        >
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="checkout-whatsapp">
+                                WhatsApp
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="checkout-whatsapp"
+                                placeholder="(84) 99999-9999"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="checkout-email">
+                                E-mail
+                            </label>
+
+                            <input
+                                type="email"
+                                id="checkout-email"
+                                placeholder="seuemail@email.com"
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- RECEBIMENTO -->
+
+                <div class="checkout-section">
+
+                    <div class="checkout-section-title">
+
+                        <span>
+                            02
+                        </span>
+
+                        <h2>
+                            Como você quer receber?
+                        </h2>
+
+                    </div>
+
+
+                    <div class="delivery-options">
+
+                        <button
+                            type="button"
+                            class="delivery-option"
+                            data-delivery="retirada"
+                        >
+
+                            <strong>
+                                Retirada
+                            </strong>
+
+                            <span>
+                                Grátis
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="delivery-option"
+                            data-delivery="entrega"
+                        >
+
+                            <strong>
+                                Entrega
+                            </strong>
+
+                            <span>
+                                Grátis
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <input
+                        type="hidden"
+                        id="checkout-delivery"
+                    >
+
+                </div>
+
+
+
+                <!-- ENDEREÇO -->
+
+                <div
+                    class="checkout-section"
+                    id="checkout-address-section"
+                >
+
+                    <div class="checkout-section-title">
+
+                        <span>
+                            03
+                        </span>
+
+                        <h2>
+                            Endereço
+                        </h2>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="checkout-cep">
+                                CEP
+                            </label>
+
+                            <input
+                                type="text"
+                                id="checkout-cep"
+                                placeholder="00000-000"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="checkout-city">
+                                Cidade
+                            </label>
+
+                            <input
+                                type="text"
+                                id="checkout-city"
+                                placeholder="Cidade"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="checkout-address">
+                            Endereço
+                        </label>
+
+                        <input
+                            type="text"
+                            id="checkout-address"
+                            placeholder="Rua, avenida..."
+                        >
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="checkout-number">
+                                Número
+                            </label>
+
+                            <input
+                                type="text"
+                                id="checkout-number"
+                                placeholder="Número"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="checkout-complement">
+                                Complemento
+                            </label>
+
+                            <input
+                                type="text"
+                                id="checkout-complement"
+                                placeholder="Apto, bloco..."
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-row">
+
+                        <div class="form-group">
+
+                            <label for="checkout-neighborhood">
+                                Bairro
+                            </label>
+
+                            <input
+                                type="text"
+                                id="checkout-neighborhood"
+                                placeholder="Bairro"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="checkout-state">
+                                Estado
+                            </label>
+
+                            <select id="checkout-state">
+
+                                <option value="">
+                                    Selecione
+                                </option>
+
+                                <option value="RN">
+                                    Rio Grande do Norte
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- PAGAMENTO -->
+
+                <div class="checkout-section">
+
+                    <div class="checkout-section-title">
+
+                        <span>
+                            04
+                        </span>
+
+                        <h2>
+                            Forma de pagamento
+                        </h2>
+
+                    </div>
+
+
+                    <div class="payment-methods">
+
+                        <button
+                            type="button"
+                            class="payment-method"
+                            data-payment="pix"
+                        >
+
+                            <div>
+
+                                <strong>
+                                    Pix
+                                </strong>
+
+                                <span>
+                                    10% de desconto a partir de R$ 100
+                                </span>
+
+                            </div>
+
+                            <span class="payment-check">
+                                ○
+                            </span>
+
+                        </button>
+
+
+                        <button
+                            type="button"
+                            class="payment-method"
+                            data-payment="card"
+                        >
+
+                            <div>
+
+                                <strong>
+                                    Cartão de crédito
+                                </strong>
+
+                                <span>
+                                    Parcelamento sem juros
+                                </span>
+
+                            </div>
+
+                            <span class="payment-check">
+                                ○
+                            </span>
+
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="checkout-payment-info"
+                        class="payment-information"
+                    ></div>
+
+
+                    <input
+                        type="hidden"
+                        id="checkout-payment"
+                    >
+
+                </div>
+
+
+
+                <button
+                    type="button"
+                    class="continue-checkout-button"
+                    id="continue-checkout-button"
+                >
+                    Continuar para pagamento
+                </button>
+
+            </div>
+
+
+
+            <!-- RESUMO -->
+
+            <aside class="checkout-summary">
+
+                <p class="eyebrow">
+                    SEU PEDIDO
+                </p>
+
+                <h2>
+                    Resumo
+                </h2>
+
+
+                <div
+                    id="checkout-summary-items"
+                    class="checkout-summary-items"
+                ></div>
+
+
+                <div class="checkout-summary-values">
+
+                    <div>
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong id="checkout-subtotal">
+                            R$ 0,00
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Frete
+                        </span>
+
+                        <strong id="checkout-shipping">
+                            Grátis
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        id="checkout-discount-row"
+                        class="checkout-discount-row"
+                    >
+
+                        <span>
+                            Desconto Pix
+                        </span>
+
+                        <strong id="checkout-discount">
+                            - R$ 0,00
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="checkout-summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong id="checkout-summary-total">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+
+                <p class="checkout-summary-note">
+                    Frete grátis para Natal e região metropolitana.
+                </p>
+
+            </aside>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             CONFIRMAÇÃO
+        ================================================== -->
+
+        <div
+            class="order-success"
+            id="order-success"
+        >
+
+            <div class="order-success-content">
+
+                <div class="order-success-icon">
+                    ✓
+                </div>
+
+                <p class="eyebrow">
+                    ZAGLY
+                </p>
+
+                <h1>
+                    Pedido enviado!
+                </h1>
+
+                <p>
+                    Recebemos seus dados e o pedido foi encaminhado
+                    pelo WhatsApp. Agora é só aguardar nosso retorno
+                    para confirmar os próximos passos.
+                </p>
+
+                <p class="order-success-note">
+                    Se o WhatsApp não abriu automaticamente,
+                    você pode falar com a gente diretamente por lá.
+                </p>
+
+                <button
+                    type="button"
+                    class="order-success-button"
+                    id="order-success-button"
+                >
+                    Voltar para a loja
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
