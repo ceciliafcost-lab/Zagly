@@ -2401,27 +2401,52 @@ document.addEventListener(
 renderProducts("Todos");
 
 updateCart();
+
 async function loadProductsFromSupabase() {
     const { data, error } = await supabaseClient
         .from("PRODUTOS")
-        .select("*")
-        .eq("ATIVO", true);
+        .select("*");
 
     if (error) {
         console.error("Erro ao carregar produtos:", error);
         return;
     }
 
-    products = data.map((item) => ({
-        id: item.ID,
-        name: item.NOME,
-        category: item.CATEGORIA,
-        price: Number(item["PREÇO"]),
-        description: item["DESCRIÇÃO"] || "",
-        images: item.IMAGEM ? [item.IMAGEM] : [],
-        sizes: []
-    })).filter((item) => item.images.length > 0);
+    const { data: estoque, error: erroEstoque } = await supabaseClient
+        .from("ESTOQUE")
+        .select("COR, TAMANHO, QUANTIDADE, produto_id");
+
+    if (erroEstoque) {
+        console.error("Erro ao carregar estoque:", erroEstoque);
+        return;
+    }
+
+    products = data.map((item) => {
+        const idProduto = item.id ?? item.ID;
+
+        const estoqueProduto = estoque.filter(
+            (linha) => String(linha.produto_id) === String(idProduto)
+        );
+
+        const tamanhos = [...new Set(
+            estoqueProduto
+                .filter((linha) => Number(linha.QUANTIDADE) > 0)
+                .map((linha) => linha.TAMANHO)
+        )];
+
+        return {
+            id: idProduto,
+            name: item.NOME,
+            category: item.CATEGORIA,
+            price: Number(item["PREÇO"]),
+            description: item["DESCRIÇÃO"] || "",
+            images: item.IMAGEM ? [item.IMAGEM] : [],
+            sizes: tamanhos,
+            stock: estoqueProduto
+        };
+    }).filter((item) => item.images.length > 0);
 
     renderProducts("Todos");
 }
+
 loadProductsFromSupabase();
