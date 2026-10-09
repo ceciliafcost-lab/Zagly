@@ -913,6 +913,17 @@ function increaseQuantity(index) {
    FECHAR CARRINHO
 ================================================== */
 
+function openCart() {
+
+    document
+        .getElementById("cart")
+        .classList.add("open");
+
+    document
+        .getElementById("cart-overlay")
+        .classList.add("active");
+
+}
 function closeCart() {
 
     document
