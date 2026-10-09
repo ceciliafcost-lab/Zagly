@@ -2921,3 +2921,58 @@ a {
     height: auto;
     object-fit: contain;
 }
+/* LOGO ZAGLY — CABEÇALHO */
+.header-container {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 28px;
+}
+
+.header .logo {
+display: flex;
+align-items: center;
+justify-content: flex-start;
+flex: 0 0 auto;
+width: 180px;
+margin-right: 20px;
+}
+
+.header .logo-img {
+display: block;
+width: 100%;
+max-width: none;
+height: auto;
+max-height: 75px;
+object-fit: contain;
+}
+
+.header .navigation {
+display: flex;
+align-items: center;
+gap: 24px;
+margin-right: auto;
+}
+
+/* Ajuste para celular */
+@media (max-width: 600px) {
+.header-container {
+gap: 12px;
+}
+
+```
+.header .logo {
+    width: 125px;
+    margin-right: 0;
+}
+
+.header .logo-img {
+    max-height: 55px;
+}
+
+.header .navigation {
+    gap: 10px;
+}
+```
+
+}
