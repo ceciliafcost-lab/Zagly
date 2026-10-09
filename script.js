@@ -905,7 +905,7 @@ function increaseQuantity(index) {
         function(linha) {
             return (
                 String(linha.produto_id) === String(item.id) &&
-                linha.TAMANHO === item.selectedSize
+                String(linha.TAMANHO).trim() === String(item.selectedSize).trim()
             );
         }
     );
@@ -2427,4 +2427,11 @@ async function loadProductsFromSupabase() {
     renderProducts("Todos");
 }
 
+function removeFromCart(index) {
+    if (index < 0 || index >= cart.length) return;
+
+    cart.splice(index, 1);
+
+    updateCart();
+}
 loadProductsFromSupabase();
