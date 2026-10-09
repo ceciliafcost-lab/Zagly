@@ -716,14 +716,15 @@ function addProductToCart() {
     }
 
 
+    
     updateCart();
 
     closeProduct();
 
     document.getElementById("cart").classList.add("open");
-document.getElementById("cart-overlay").classList.add("active");
+    document.getElementById("cart-overlay").classList.add("active");
 
-
+}
 /* ==================================================
    ATUALIZAR CARRINHO
 ================================================== */
