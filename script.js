@@ -868,88 +868,45 @@ function updateCart() {
    QUANTIDADE NO CARRINHO
 ================================================== */
 
+
 function increaseQuantity(index) {
 
-    cart[index].quantity += 1;
+    const item = cart[index];
 
-    updateCart();
-
-
-    if (
-        document
-            .getElementById(
-                "checkout-page"
-            )
-            .classList.contains("active")
-    ) {
-
-        renderCheckoutSummary();
-
-    }
-
-}
-
-
-function decreaseQuantity(index) {
-
-    if (cart[index].quantity > 1) {
-
-        cart[index].quantity -= 1;
-
-    } else {
-
-        cart.splice(index, 1);
-
-    }
-
-
-    updateCart();
-
-
-    if (
-        document
-            .getElementById(
-                "checkout-page"
-            )
-            .classList.contains("active")
-    ) {
-
-        renderCheckoutSummary();
-
-    }
-
-}
-
-
-function removeFromCart(index) {
-
-    cart.splice(index, 1);
-
-    updateCart();
-
-
-    if (
-        document
-            .getElementById(
-                "checkout-page"
-            )
-            .classList.contains("active")
-    ) {
-
-        if (cart.length === 0) {
-
-            closeCheckout();
-
-        } else {
-
-            renderCheckoutSummary();
-
+    const estoqueDoTamanho = item.stock?.find(
+        function(linha) {
+            return (
+                String(linha.produto_id) === String(item.id) &&
+                linha.TAMANHO === item.selectedSize
+            );
         }
+    );
 
+    if (!estoqueDoTamanho) {
+        alert("Não foi possível verificar o estoque deste tamanho.");
+        return;
+    }
+
+    const quantidadeDisponivel = Number(estoqueDoTamanho.QUANTIDADE);
+
+    if (item.quantity >= quantidadeDisponivel) {
+        alert("Você já atingiu a quantidade disponível deste tamanho.");
+        return;
+    }
+
+    item.quantity += 1;
+
+    updateCart();
+
+    if (
+        document
+            .getElementById("checkout-page")
+            .classList.contains("active")
+    ) {
+        renderCheckoutSummary();
     }
 
 }
-
 
 /* ==================================================
    ABRIR CARRINHO
