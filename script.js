@@ -621,59 +621,65 @@ function closeProduct() {
 ================================================== */
 
 
+
+function getSelectedSizeStock() {
+    if (!selectedProduct) return 0;
+
+    const selectedSizeButton = document.querySelector(
+        ".size-button.selected"
+    );
+
+    if (!selectedSizeButton) return 0;
+
+    const selectedSize = selectedSizeButton.textContent.trim();
+
+    const stockRow = selectedProduct.stock?.find(function (linha) {
+        return (
+            String(linha.produto_id) === String(selectedProduct.id) &&
+            String(linha.TAMANHO).trim() === selectedSize
+        );
+    });
+
+    return stockRow ? Math.max(0, Number(stockRow.QUANTIDADE) || 0) : 0;
+}
+
 function increaseProductQuantity() {
     if (!selectedProduct) return;
 
-    const selectedSizeButton = document.querySelector(".size-button.selected");
+    const selectedSizeButton = document.querySelector(
+        ".size-button.selected"
+    );
 
     if (!selectedSizeButton) {
         alert("Selecione um tamanho.");
         return;
     }
 
-    const selectedSize = selectedSizeButton.textContent;
+    const available = getSelectedSizeStock();
 
-    const estoqueDoTamanho = selectedProduct.stock?.find(
-        function(linha) {
-            return (
-                String(linha.produto_id) === String(selectedProduct.id) &&
-                linha.TAMANHO === selectedSize
-            );
-        }
-    );
-
-    if (!estoqueDoTamanho) {
-        alert("Não foi possível verificar o estoque deste tamanho.");
+    if (available <= 0) {
+        alert("Este tamanho está indisponível.");
         return;
     }
 
-    const quantidadeDisponivel = Number(estoqueDoTamanho.QUANTIDADE);
-
-    if (selectedQuantity >= quantidadeDisponivel) {
+    if (selectedQuantity >= available) {
         alert("Você já atingiu a quantidade disponível deste tamanho.");
         return;
     }
 
     selectedQuantity += 1;
 
-    document.getElementById("modal-quantity").textContent = selectedQuantity;
+    document.getElementById("modal-quantity").textContent =
+        selectedQuantity;
 }
 
-
 function decreaseProductQuantity() {
-
     if (selectedQuantity > 1) {
-
         selectedQuantity -= 1;
-
     }
 
-
-    document.getElementById(
-        "modal-quantity"
-    ).textContent =
+    document.getElementById("modal-quantity").textContent =
         selectedQuantity;
-
 }
 
 
@@ -681,76 +687,70 @@ function decreaseProductQuantity() {
    ADICIONAR AO CARRINHO
 ================================================== */
 
+
 function addProductToCart() {
+    if (!selectedProduct) return;
 
-    if (!selectedProduct) {
-        return;
-    }
-
-
-    const selectedSizeButton =
-        document.querySelector(
-            ".size-button.selected"
-        );
-
+    const selectedSizeButton = document.querySelector(
+        ".size-button.selected"
+    );
 
     if (!selectedSizeButton) {
-
-        alert(
-            "Selecione um tamanho."
-        );
-
+        alert("Selecione um tamanho.");
         return;
     }
 
+    const selectedSize = selectedSizeButton.textContent.trim();
 
-    const selectedSize =
-        selectedSizeButton.textContent;
-
-
-    const existingItem =
-        cart.find(
-            function(item) {
-
-                return (
-                    item.id === selectedProduct.id &&
-                    item.selectedSize === selectedSize
-                );
-
-            }
+    const stockRow = selectedProduct.stock?.find(function (linha) {
+        return (
+            String(linha.produto_id) === String(selectedProduct.id) &&
+            String(linha.TAMANHO).trim() === selectedSize
         );
+    });
 
-
-    if (existingItem) {
-
-        existingItem.quantity +=
-            selectedQuantity;
-
-    } else {
-
-        cart.push({
-
-            ...selectedProduct,
-
-            selectedSize:
-                selectedSize,
-
-            quantity:
-                selectedQuantity
-
-        });
-
+    if (!stockRow) {
+        alert("Não foi possível verificar o estoque deste tamanho.");
+        return;
     }
 
+    const available = Math.max(0, Number(stockRow.QUANTIDADE) || 0);
 
-    
+    if (available === 0) {
+        alert("Este tamanho está indisponível.");
+        return;
+    }
+
+    const existingItem = cart.find(function (item) {
+        return (
+            String(item.id) === String(selectedProduct.id) &&
+            item.selectedSize === selectedSize
+        );
+    });
+
+    const quantityInCart = existingItem ? existingItem.quantity : 0;
+
+    if (quantityInCart + selectedQuantity > available) {
+        alert(
+            `Estoque disponível: ${available} unidade(s). ` +
+            `Você já tem ${quantityInCart} no carrinho.`
+        );
+        return;
+    }
+
+    if (existingItem) {
+        existingItem.quantity += selectedQuantity;
+    } else {
+        cart.push({
+            ...selectedProduct,
+            selectedSize: selectedSize,
+            quantity: selectedQuantity
+        });
+    }
+
     updateCart();
-
     closeProduct();
-
-    document.getElementById("cart").classList.add("open");
-    document.getElementById("cart-overlay").classList.add("active");
-
+    openCart();
 }
 /* ==================================================
    ATUALIZAR CARRINHO
