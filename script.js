@@ -2401,3 +2401,27 @@ document.addEventListener(
 renderProducts("Todos");
 
 updateCart();
+async function loadProductsFromSupabase() {
+    const { data, error } = await supabaseClient
+        .from("PRODUTOS")
+        .select("*")
+        .eq("ATIVO", true);
+
+    if (error) {
+        console.error("Erro ao carregar produtos:", error);
+        return;
+    }
+
+    products = data.map((item) => ({
+        id: item.ID,
+        name: item.NOME,
+        category: item.CATEGORIA,
+        price: Number(item["PREÇO"]),
+        description: item["DESCRIÇÃO"] || "",
+        images: item.IMAGEM ? [item.IMAGEM] : [],
+        sizes: []
+    })).filter((item) => item.images.length > 0);
+
+    renderProducts("Todos");
+}
+loadProductsFromSupabase();
