@@ -869,6 +869,7 @@ function updateCart() {
 ================================================== */
 
 
+
 function increaseQuantity(index) {
 
     const item = cart[index];
@@ -907,24 +908,6 @@ function increaseQuantity(index) {
     }
 
 }
-
-/* ==================================================
-   ABRIR CARRINHO
-================================================== */
-
-function openCart() {
-
-    document
-        .getElementById("cart")
-        .classList.add("open");
-
-
-    document
-        .getElementById("cart-overlay")
-        .classList.add("active");
-
-}
-
 
 /* ==================================================
    FECHAR CARRINHO
