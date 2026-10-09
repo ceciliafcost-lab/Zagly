@@ -20,8 +20,7 @@ supabaseClient
    PRODUTOS
 ================================================== */
 
-const products = [
-
+let products = [
     {
         id: 1,
         name: "Camiseta Básica Preta",
