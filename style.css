@@ -2907,3 +2907,17 @@ a {
     height: auto;
     object-fit: contain;
 }
+
+.header .logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.header .logo img {
+    display: block;
+    width: 130px;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
