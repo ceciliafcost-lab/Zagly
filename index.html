@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,12 +6,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#ffffff">
     <meta name="description" content="Zagly — peças básicas, versáteis e acessíveis para todos os dias.">
+
     <title>ZAGLY | Básicos para todos os dias</title>
 
     <link rel="stylesheet" href="style.css">
 
     <style>
-        /* Confirmação do pedido */
+        /* CABEÇALHO E LOGO */
+        .header {
+            width: 100%;
+            position: relative;
+            z-index: 100;
+            background: #fff;
+        }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .header .logo {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex: 0 0 210px;
+            width: 210px;
+            min-width: 0;
+            margin: 0 20px 0 0;
+            text-decoration: none;
+        }
+
+        .header .logo-img {
+            display: block;
+            width: 100%;
+            max-width: none;
+            max-height: 85px;
+            height: auto;
+            object-fit: contain;
+            object-position: left center;
+        }
+
+        .header .navigation {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 26px;
+            margin-right: auto;
+        }
+
+        .header .cart-button {
+            flex: 0 0 auto;
+        }
+
+        /* CONFIRMAÇÃO DO PEDIDO */
         .order-success {
             display: none;
             min-height: 70vh;
@@ -81,26 +132,7 @@
             opacity: 0.85;
         }
 
-        /* Logo: tamanho e exibição */
-        .header .logo {
-            display: flex;
-            align-items: center;
-            flex-shrink: 0;
-            width: 130px;
-            min-width: 100px;
-            text-decoration: none;
-        }
-
-        .header .logo img {
-            display: block;
-            width: 130px;
-            max-width: 100%;
-            max-height: 58px;
-            height: auto;
-            object-fit: contain;
-        }
-
-        /* Acessibilidade */
+        /* ACESSIBILIDADE */
         button,
         input,
         select {
@@ -115,7 +147,32 @@
             outline-offset: 3px;
         }
 
+        /* RESPONSIVIDADE */
         @media (max-width: 600px) {
+            .header-container {
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .header .logo {
+                flex: 0 0 125px;
+                width: 125px;
+                margin-right: 0;
+            }
+
+            .header .logo-img {
+                max-height: 55px;
+            }
+
+            .header .navigation {
+                gap: 12px;
+                margin-right: 0;
+            }
+
+            .header .cart-button {
+                margin-left: auto;
+            }
+
             .order-success {
                 min-height: 65vh;
                 padding: 50px 20px;
@@ -128,15 +185,25 @@
             .order-success h1 {
                 font-size: 34px;
             }
+        }
 
-            .header .logo {
-                width: 100px;
-                min-width: 80px;
+        @media (max-width: 380px) {
+            .header-container {
+                column-gap: 8px;
             }
 
-            .header .logo img {
-                width: 100px;
-                max-height: 48px;
+            .header .logo {
+                flex-basis: 105px;
+                width: 105px;
+            }
+
+            .header .navigation {
+                gap: 8px;
+                font-size: 12px;
+            }
+
+            .header .cart-button {
+                font-size: 12px;
             }
         }
     </style>
@@ -145,33 +212,16 @@
 <body>
 
     <!-- CABEÇALHO -->
- 
-        <a href="#inicio" class="logo" aria-label="Zagly - Página inicial">
-            <img
-                src="https://raw.githubusercontent.com/ceciliafcost-lab/Zagly/main/IMAGENS/_LOGO_ZAGLY-01.png"
-                alt="Zagly"
-                class="logo-img"
-            >
-        </a>
+    <header class="header">
+        <div class="header-container">
 
-        <nav class="navigation" aria-label="Navegação principal">
-            <a href="#inicio">Início</a>
-            <a href="#produtos">Produtos</a>
-            <a href="#sobre">Sobre</a>
-        </nav>
-
-        <button
-            class="cart-button"
-            id="open-cart"
-            type="button"
-            aria-label="Abrir carrinho"
-        >
-            <span>Carrinho</span>
-            <span id="cart-count">0</span>
-        </button>
-
-
-
+            <a href="#inicio" class="logo" aria-label="Zagly - Página inicial">
+                <img
+                    src="https://raw.githubusercontent.com/ceciliafcost-lab/Zagly/main/IMAGENS/_LOGO_ZAGLY-01.png"
+                    alt="Zagly"
+                    class="logo-img"
+                >
+            </a>
 
             <nav class="navigation" aria-label="Navegação principal">
                 <a href="#inicio">Início</a>
@@ -721,3 +771,4 @@
     <script src="script.js"></script>
 </body>
 </html>
+```
