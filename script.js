@@ -5,6 +5,17 @@ const supabaseClient = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
+
+supabaseClient
+    .from("PRODUTOS")
+    .select("*")
+    .then(({ data, error }) => {
+        if (error) {
+            console.error("Erro ao consultar produtos:", error);
+        } else {
+            console.log("Conexão com Supabase funcionando!", data);
+        }
+    });
 /* ==================================================
    PRODUTOS
 ================================================== */
