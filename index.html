@@ -145,18 +145,32 @@
 <body>
 
     <!-- CABEÇALHO -->
-    <header class="header">
-        <div class="header-container">
+  ```
+        <a href="#inicio" class="logo" aria-label="Zagly - Página inicial">
+            <img
+                src="https://raw.githubusercontent.com/ceciliafcost-lab/Zagly/main/IMAGENS/_LOGO_ZAGLY-01.png"
+                alt="Zagly"
+                class="logo-img"
+            >
+        </a>
 
-           ```html
-<a href="#inicio" class="logo" aria-label="Zagly - Página inicial">
-    <img
-        src="https://raw.githubusercontent.com/ceciliafcost-lab/Zagly/main/IMAGENS/_LOGO_ZAGLY-01.png"
-        alt="Zagly"
-        class="logo-img"
-    >
-</a>
+        <nav class="navigation" aria-label="Navegação principal">
+            <a href="#inicio">Início</a>
+            <a href="#produtos">Produtos</a>
+            <a href="#sobre">Sobre</a>
+        </nav>
+
+        <button
+            class="cart-button"
+            id="open-cart"
+            type="button"
+            aria-label="Abrir carrinho"
+        >
+            <span>Carrinho</span>
+            <span id="cart-count">0</span>
+        </button>
 ```
+
 
 
             <nav class="navigation" aria-label="Navegação principal">
