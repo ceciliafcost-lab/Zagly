@@ -2895,3 +2895,15 @@ a {
         padding: 10px 13px;
     }
 }
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    display: block;
+    width: 130px;
+    height: auto;
+    object-fit: contain;
+}
