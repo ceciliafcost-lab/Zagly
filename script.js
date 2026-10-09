@@ -620,16 +620,43 @@ function closeProduct() {
    QUANTIDADE DO PRODUTO
 ================================================== */
 
+
 function increaseProductQuantity() {
+    if (!selectedProduct) return;
+
+    const selectedSizeButton = document.querySelector(".size-button.selected");
+
+    if (!selectedSizeButton) {
+        alert("Selecione um tamanho.");
+        return;
+    }
+
+    const selectedSize = selectedSizeButton.textContent;
+
+    const estoqueDoTamanho = selectedProduct.stock?.find(
+        function(linha) {
+            return (
+                String(linha.produto_id) === String(selectedProduct.id) &&
+                linha.TAMANHO === selectedSize
+            );
+        }
+    );
+
+    if (!estoqueDoTamanho) {
+        alert("Não foi possível verificar o estoque deste tamanho.");
+        return;
+    }
+
+    const quantidadeDisponivel = Number(estoqueDoTamanho.QUANTIDADE);
+
+    if (selectedQuantity >= quantidadeDisponivel) {
+        alert("Você já atingiu a quantidade disponível deste tamanho.");
+        return;
+    }
 
     selectedQuantity += 1;
 
-
-    document.getElementById(
-        "modal-quantity"
-    ).textContent =
-        selectedQuantity;
-
+    document.getElementById("modal-quantity").textContent = selectedQuantity;
 }
 
 
