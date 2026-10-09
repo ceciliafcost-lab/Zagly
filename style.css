@@ -2976,3 +2976,77 @@ gap: 12px;
 ```
 
 }
+
+/* AJUSTES RESPONSIVOS ZAGLY */
+
+/* Tablets */
+@media (min-width: 601px) and (max-width: 1000px) {
+    .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 24px;
+    }
+
+    .product-image {
+        height: 300px;
+    }
+
+    .hero {
+        padding: 60px 32px;
+    }
+
+    .hero h1 {
+        font-size: clamp(36px, 5vw, 52px);
+    }
+
+    .hero .eyebrow {
+        font-size: clamp(28px, 4vw, 44px);
+    }
+}
+
+/* Celulares */
+@media (max-width: 600px) {
+    .products-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .product-image {
+        height: 220px;
+    }
+
+    .hero {
+        padding: 44px 20px;
+    }
+
+    .hero h1 {
+        font-size: clamp(32px, 8vw, 42px);
+    }
+
+    .hero .eyebrow {
+        font-size: clamp(28px, 7vw, 40px);
+    }
+
+    .hero-text {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .primary-button {
+        max-width: 100%;
+    }
+}
+
+/* Celulares estreitos */
+@media (max-width: 380px) {
+    .products-grid {
+        gap: 8px;
+    }
+
+    .product-image {
+        height: 180px;
+    }
+
+    .hero {
+        padding: 36px 16px;
+    }
+}
