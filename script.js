@@ -720,9 +720,8 @@ function addProductToCart() {
 
     closeProduct();
 
-    openCart();
-
-}
+    document.getElementById("cart").classList.add("open");
+document.getElementById("cart-overlay").classList.add("active");
 
 
 /* ==================================================
